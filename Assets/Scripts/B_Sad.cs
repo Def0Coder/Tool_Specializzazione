@@ -23,10 +23,18 @@ public class B_Sad : MonoBehaviour
         }
     }
 
+
+    private void Update()
+    {
+        
+       // ChangeColor();
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
         // Cambia colore quando tocca qualcosa
-        ChangeColor();
+        //ChangeColor();
 
         // Aggiunge una forza verso l'alto per rimbalzare
         rb.velocity = new Vector3(rb.velocity.x, bounceForce, rb.velocity.z);
