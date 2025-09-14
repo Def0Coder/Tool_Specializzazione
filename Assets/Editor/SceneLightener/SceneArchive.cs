@@ -7,6 +7,9 @@ using System.Collections.Generic;
 #endif
 public class SceneArchive : ScriptableObject
 {
+
+
+
     [Serializable]
     public class ObjectData
     {

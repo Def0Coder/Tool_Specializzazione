@@ -4,9 +4,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Drawing;
 
 public class ArchiveWindow : EditorWindow
 {
+    [SerializeField] string nameArchive;
+
     private Vector2 scrollPos;
     private string searchFilter = "";
     private Dictionary<string, bool> foldoutStates = new Dictionary<string, bool>();
@@ -17,6 +20,12 @@ public class ArchiveWindow : EditorWindow
     void OnGUI()
     {
         GUILayout.Label(" Scene Archive Manager", EditorStyles.boldLabel);
+
+        // Name bar
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Name:", GUILayout.Width(100));
+        nameArchive = EditorGUILayout.TextField(nameArchive);
+        EditorGUILayout.EndHorizontal();
 
         // Search bar
         EditorGUILayout.BeginHorizontal();
