@@ -21,6 +21,10 @@ public class SceneArchive : ScriptableObject
         public Vector3 scale;
         public string prefabPath;
 
+        // Hierarchy
+        public string parentName;
+
+
         // Dati mesh
         public Mesh mesh;
         public Material[] materials;
@@ -33,6 +37,22 @@ public class SceneArchive : ScriptableObject
         // Dati collider
         public Vector3 colliderCenter;
         public Vector3 colliderSize;
+
+        // Rigidbody
+        public bool useGravity;
+        public bool isKinematic;
+        public float mass;
+
+        // Animator
+        public RuntimeAnimatorController animatorController;
+        public Avatar animatorAvatar;
+
+        // Particle System
+        public bool psLooping;
+        public float psStartLifetime;
+        public float psStartSpeed;
+        public Color psStartColor;
+
     }
 
     public List<ObjectData> archivedObjects = new List<ObjectData>();
@@ -88,6 +108,38 @@ public class SceneArchive : ScriptableObject
             {
                 data.colliderCenter = boxCollider.center;
                 data.colliderSize = boxCollider.size;
+            }
+
+            // Hierarchy
+            if (obj.transform.parent != null)
+                data.parentName = obj.transform.parent.name;
+
+            // Rigidbody
+            var rb = obj.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                data.useGravity = rb.useGravity;
+                data.isKinematic = rb.isKinematic;
+                data.mass = rb.mass;
+            }
+
+            // Animator
+            var animator = obj.GetComponent<Animator>();
+            if (animator != null)
+            {
+                data.animatorController = animator.runtimeAnimatorController;
+                data.animatorAvatar = animator.avatar;
+            }
+
+            // ParticleSystem
+            var ps = obj.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                var main = ps.main;
+                data.psLooping = main.loop;
+                data.psStartLifetime = main.startLifetime.constant;
+                data.psStartSpeed = main.startSpeed.constant;
+                data.psStartColor = main.startColor.color;
             }
 
             archivedObjects.Add(data);

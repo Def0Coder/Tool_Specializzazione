@@ -21,12 +21,6 @@ public class ArchiveWindow : EditorWindow
     {
         GUILayout.Label(" Scene Archive Manager", EditorStyles.boldLabel);
 
-        // Name bar
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.Label("Name:", GUILayout.Width(100));
-        nameArchive = EditorGUILayout.TextField(nameArchive);
-        EditorGUILayout.EndHorizontal();
-
         // Search bar
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Search:", GUILayout.Width(50));

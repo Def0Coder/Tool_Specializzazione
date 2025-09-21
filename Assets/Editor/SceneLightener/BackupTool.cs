@@ -37,13 +37,11 @@ public static class BackupTool
             objects = objects.Take(MAX_SELECTION).ToList();
         }
 
-        // Crea cartella se necessario
         if (!AssetDatabase.IsValidFolder(BACKUP_PATH))
         {
             ProjectSetupTool.CreateBackupFolder();
         }
 
-        // Crea asset di archivio
         var archive = ScriptableObject.CreateInstance<SceneArchive>();
         archive.CaptureObjects(objects);
 
@@ -56,11 +54,9 @@ public static class BackupTool
         AssetDatabase.CreateAsset(archive, assetPath);
         AssetDatabase.SaveAssets();
 
-        // Disabilita gli oggetti in scena
         foreach (var obj in objects)
         {
-            obj.SetActive(false);
-            EditorUtility.SetDirty(obj);
+            Undo.DestroyObjectImmediate(obj);
         }
 
         Debug.Log($"<color=green>✓</color> Backed up {objects.Count} objects to {assetPath}", archive);
@@ -82,7 +78,6 @@ public static class BackupTool
     {
         GameObject restoredObject = null;
 
-        // Prova a ripristinare da prefab
         if (!string.IsNullOrEmpty(data.prefabPath))
         {
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(data.prefabPath);
@@ -92,25 +87,35 @@ public static class BackupTool
             }
         }
 
-        // Crea un nuovo oggetto se non c'è prefab
         if (restoredObject == null)
         {
             restoredObject = new GameObject(data.objectName);
         }
 
-        // Applica trasformazione
         Transform t = restoredObject.transform;
         t.position = data.position;
         t.eulerAngles = data.rotation;
         t.localScale = data.scale;
 
-        // Imposta stato attivo
         restoredObject.SetActive(data.wasActive);
 
-        // Ripristina componenti
+        // Restore gerarchia
+        if (!string.IsNullOrEmpty(data.parentName))
+        {
+            var parent = GameObject.Find(data.parentName);
+            if (parent != null)
+            {
+                restoredObject.transform.SetParent(parent.transform);
+            }
+        }
+
+        // Componenti
         RestoreMeshComponents(restoredObject, data);
         RestoreLightComponent(restoredObject, data);
         RestoreColliderComponent(restoredObject, data);
+        RestoreRigidbodyComponent(restoredObject, data);
+        RestoreAnimatorComponent(restoredObject, data);
+        RestoreParticleSystemComponent(restoredObject, data);
     }
 
     private static void RestoreMeshComponents(GameObject obj, SceneArchive.ObjectData data)
@@ -152,6 +157,46 @@ public static class BackupTool
 
             collider.center = data.colliderCenter;
             collider.size = data.colliderSize;
+        }
+    }
+
+    private static void RestoreRigidbodyComponent(GameObject obj, SceneArchive.ObjectData data)
+    {
+        if (data.mass > 0)
+        {
+            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            if (rb == null) rb = obj.AddComponent<Rigidbody>();
+
+            rb.useGravity = data.useGravity;
+            rb.isKinematic = data.isKinematic;
+            rb.mass = data.mass;
+        }
+    }
+
+    private static void RestoreAnimatorComponent(GameObject obj, SceneArchive.ObjectData data)
+    {
+        if (data.animatorController != null)
+        {
+            Animator animator = obj.GetComponent<Animator>();
+            if (animator == null) animator = obj.AddComponent<Animator>();
+
+            animator.runtimeAnimatorController = data.animatorController;
+            animator.avatar = data.animatorAvatar;
+        }
+    }
+
+    private static void RestoreParticleSystemComponent(GameObject obj, SceneArchive.ObjectData data)
+    {
+        if (data.psStartLifetime > 0 || data.psStartSpeed > 0)
+        {
+            ParticleSystem ps = obj.GetComponent<ParticleSystem>();
+            if (ps == null) ps = obj.AddComponent<ParticleSystem>();
+
+            var main = ps.main;
+            main.loop = data.psLooping;
+            main.startLifetime = data.psStartLifetime;
+            main.startSpeed = data.psStartSpeed;
+            main.startColor = data.psStartColor;
         }
     }
 }
