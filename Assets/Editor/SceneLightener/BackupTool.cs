@@ -39,7 +39,7 @@ public static class BackupTool
 
         if (!AssetDatabase.IsValidFolder(BACKUP_PATH))
         {
-            ProjectSetupTool.CreateBackupFolder();
+           // ProjectSetupTool.CreateBackupFolder();
         }
 
         var archive = ScriptableObject.CreateInstance<SceneArchive>();

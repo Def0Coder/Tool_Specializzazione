@@ -19,7 +19,7 @@ public class LevelDesignerTool : EditorWindow
     // Cube tool params
     Vector3 cubeSize = new Vector3(5, 5, 5);
 
-    [MenuItem("Tool/Level Designer Tool")]
+    [MenuItem("Tools/Level Designer Tool")]
     public static void ShowWindow()
     {
         GetWindow<LevelDesignerTool>("Level Designer Tool");
