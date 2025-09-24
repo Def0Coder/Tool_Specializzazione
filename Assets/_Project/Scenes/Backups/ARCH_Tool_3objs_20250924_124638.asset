@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c0b5cc17b46254da176d234610cf71, type: 3}
+  m_Name: ARCH_Tool_3objs_20250924_124638
+  m_EditorClassIdentifier: 
+  archivedObjects:
+  - objectName: Y Bot
+    instanceID: -56872
+    wasActive: 1
+    position: {x: -38.61621, y: -0.0000038146973, z: 7.818101}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 5, y: 5, z: 5}
+    prefabPath: Assets/_Project/Prefabs/Y Bot.prefab
+    parentName: 
+    mesh: {fileID: 0}
+    materials: []
+    lightColor: {r: 0, g: 0, b: 0, a: 0}
+    lightIntensity: 0
+    lightRange: 0
+    colliderCenter: {x: 0, y: 0, z: 0}
+    colliderSize: {x: 0, y: 0, z: 0}
+    useGravity: 0
+    isKinematic: 0
+    mass: 0
+    animatorController: {fileID: 0}
+    animatorAvatar: {fileID: 0}
+    psLooping: 0
+    psStartLifetime: 0
+    psStartSpeed: 0
+    psStartColor: {r: 0, g: 0, b: 0, a: 0}
+  - objectName: Tree1
+    instanceID: -56572
+    wasActive: 1
+    position: {x: -10.841537, y: -5.353504e-16, z: 24.110039}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    prefabPath: Assets/_Project/Prefabs/Tree1.prefab
+    parentName: SpawnedGroup
+    mesh: {fileID: 0}
+    materials: []
+    lightColor: {r: 0, g: 0, b: 0, a: 0}
+    lightIntensity: 0
+    lightRange: 0
+    colliderCenter: {x: 0, y: 0, z: 0}
+    colliderSize: {x: 0, y: 0, z: 0}
+    useGravity: 0
+    isKinematic: 0
+    mass: 0
+    animatorController: {fileID: 0}
+    animatorAvatar: {fileID: 0}
+    psLooping: 0
+    psStartLifetime: 0
+    psStartSpeed: 0
+    psStartColor: {r: 0, g: 0, b: 0, a: 0}
+  - objectName: Y Bot
+    instanceID: -56594
+    wasActive: 1
+    position: {x: -31.914959, y: 0, z: 22.986782}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 5, y: 5, z: 5}
+    prefabPath: Assets/_Project/Prefabs/Y Bot.prefab
+    parentName: 
+    mesh: {fileID: 0}
+    materials: []
+    lightColor: {r: 0, g: 0, b: 0, a: 0}
+    lightIntensity: 0
+    lightRange: 0
+    colliderCenter: {x: 0, y: 0, z: 0}
+    colliderSize: {x: 0, y: 0, z: 0}
+    useGravity: 0
+    isKinematic: 0
+    mass: 0
+    animatorController: {fileID: 0}
+    animatorAvatar: {fileID: 0}
+    psLooping: 0
+    psStartLifetime: 0
+    psStartSpeed: 0
+    psStartColor: {r: 0, g: 0, b: 0, a: 0}
+  sceneName: Tool

@@ -50,7 +50,7 @@ public class LevelDesignerTool : EditorWindow
 
     void OnGUI()
     {
-        GUILayout.Label("⚒️ Level Designer Tool", EditorStyles.boldLabel);
+        GUILayout.Label("Level Designer Tool", EditorStyles.boldLabel);
 
         // === Tool Toggles ===
         DrawToolToggle("Circle Tool", ref spawnCircleEnabled);
@@ -107,8 +107,8 @@ public class LevelDesignerTool : EditorWindow
         if (pathToolEnabled)
         {
             pathSpacing = EditorGUILayout.FloatField("Distanza tra oggetti", pathSpacing);
-            if (GUILayout.Button("✔️ Conferma Path")) PlacePathObjects();
-            if (GUILayout.Button("❌ Cancella Path")) pathPoints.Clear();
+            if (GUILayout.Button("Conferma Path")) PlacePathObjects();
+            if (GUILayout.Button("Cancella Path")) pathPoints.Clear();
             EditorGUILayout.HelpBox("Click sinistro = aggiungi punti.\nInvio o 'Conferma Path' = piazza oggetti.\n'Cancella Path' = reset path.", MessageType.Info);
         }
 
